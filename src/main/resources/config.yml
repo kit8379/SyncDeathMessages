@@ -1,0 +1,45 @@
+commands:
+  PLAYER_KILL:
+    - "say {player} was killed by {killer}"
+  ENTITY_ATTACK:
+    - "say {player} was killed by a mob"
+  PROJECTILE:
+    - "say {player} was killed by a projectile"
+  SUFFOCATION:
+    - "say {player} suffocated"
+  FALL:
+    - "say {player} fell to their death"
+  FIRE:
+    - "say {player} burned to death"
+  FIRE_TICK:
+    - "say {player} burned to death"
+  MELTING:
+    - "say {player} melted"
+  LAVA:
+    - "say {player} fell into lava"
+  DROWNING:
+    - "say {player} drowned"
+  BLOCK_EXPLOSION:
+    - "say {player} was killed by an explosion"
+  ENTITY_EXPLOSION:
+    - "say {player} was killed by an explosion"
+  VOID:
+    - "say {player} fell into the void"
+  LIGHTNING:
+    - "say {player} was struck by lightning"
+  SUICIDE:
+    - "say {player} took their own life"
+  STARVATION:
+    - "say {player} starved to death"
+  POISON:
+    - "say {player} was poisoned"
+  MAGIC:
+    - "say {player} was killed by magic"
+  WITHER:
+    - "say {player} withered away"
+  FALLING_BLOCK:
+    - "say {player} was crushed by a falling block"
+  THORNS:
+    - "say {player} was killed by thorns"
+  CUSTOM:
+    - "say {player} died from a custom cause"
