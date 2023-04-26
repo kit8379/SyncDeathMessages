@@ -2,7 +2,7 @@ commands:
   PLAYER_KILL:
     - "say {player} was killed by {killer}"
   ENTITY_ATTACK:
-    - "say {player} was killed by a mob"
+    - "say {player} was killed by {mobdisplayname}"
   PROJECTILE:
     - "say {player} was killed by a projectile"
   SUFFOCATION:

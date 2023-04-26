@@ -22,18 +22,33 @@ public class DeathEvent extends JavaPlugin implements Listener {
         event.setDeathMessage(null);
 
         Entity killer = event.getEntity().getKiller();
-        List<String> commands;
-        if (killer instanceof Player) {
-            commands = getConfig().getStringList("commands.PLAYER_KILL");
-        } else {
-            String causeOfDeath = event.getEntity().getLastDamageCause().getCause().name();
-            commands = getConfig().getStringList("commands." + causeOfDeath);
-        }
+        List<String> commands = getCommandsForDeathEvent(killer, event);
 
         for (String command : commands) {
-            command = command.replace("{player}", event.getEntity().getName())
-                    .replace("{killer}", killer.getName());
+            command = processCommandPlaceholders(command, event, killer);
             getServer().dispatchCommand(getServer().getConsoleSender(), command);
         }
+    }
+
+    private List<String> getCommandsForDeathEvent(Entity killer, PlayerDeathEvent event) {
+        if (killer instanceof Player) {
+            return getConfig().getStringList("commands.PLAYER_KILL");
+        } else {
+            String causeOfDeath = event.getEntity().getLastDamageCause().getCause().name();
+            return getConfig().getStringList("commands." + causeOfDeath);
+        }
+    }
+
+    private String processCommandPlaceholders(String command, PlayerDeathEvent event, Entity killer) {
+        String playerName = event.getEntity().getName();
+        String killerName = killer != null ? killer.getName() : "unknown";
+        String mobDisplayName = killer != null ? killer.getCustomName() : "unknown";
+        if (mobDisplayName == null) {
+            mobDisplayName = killer.getType().name();
+        }
+
+        return command.replace("{player}", playerName)
+                .replace("{killer}", killerName)
+                .replace("{mobdisplayname}", mobDisplayName);
     }
 }
