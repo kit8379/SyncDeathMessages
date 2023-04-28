@@ -2,3 +2,4 @@ name: DeathEvent
 version: '${project.version}'
 main: org.me.deathevent.DeathEvent
 api-version: 1.15
+folia-supported: true
