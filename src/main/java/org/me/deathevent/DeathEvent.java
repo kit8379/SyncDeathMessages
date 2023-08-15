@@ -19,8 +19,6 @@ public class DeathEvent extends JavaPlugin implements Listener {
 
     @EventHandler(priority = EventPriority.HIGH)
     public void onPlayerDeath(PlayerDeathEvent event) {
-        event.setDeathMessage(null);
-
         Entity killer = event.getEntity().getKiller();
         List<String> commands = getCommandsForDeathEvent(killer, event);
 
