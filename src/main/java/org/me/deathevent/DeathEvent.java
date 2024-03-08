@@ -6,9 +6,11 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.PlayerDeathEvent;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.List;
+import java.util.Objects;
 
 public class DeathEvent extends JavaPlugin implements Listener {
 
@@ -19,34 +21,28 @@ public class DeathEvent extends JavaPlugin implements Listener {
 
     @EventHandler(priority = EventPriority.HIGH)
     public void onPlayerDeath(PlayerDeathEvent event) {
-        Entity killer = event.getEntity().getKiller();
-        List<String> commands = getCommandsForDeathEvent(killer, event);
+        Player player = event.getEntity();
+        Entity killer = player.getKiller();
+        String playerName = player.getName();
+        String messageKey = "default";
 
+        if (killer instanceof Player killerPlayer) {
+            ItemStack weapon = killerPlayer.getInventory().getItemInMainHand();
+            String weaponName = weapon.hasItemMeta() && Objects.requireNonNull(weapon.getItemMeta()).hasDisplayName() ? weapon.getItemMeta().getDisplayName() : weapon.getType().name();
+            messageKey = !weaponName.isEmpty() ? "with_weapon" : "default";
+            List<String> commands = getConfig().getStringList("commands.PLAYER_KILL." + messageKey);
+            executeCommands(commands, playerName, killerPlayer.getName(), weaponName, "");
+        } else {
+            String causeOfDeath = player.getLastDamageCause() != null ? player.getLastDamageCause().getCause().name() : "UNKNOWN";
+            List<String> commands = getConfig().getStringList("commands." + causeOfDeath + "." + messageKey);
+            executeCommands(commands, playerName, "", "", "");
+        }
+    }
+
+    private void executeCommands(List<String> commands, String playerName, String killerName, String weaponName, String mobName) {
         for (String command : commands) {
-            command = processCommandPlaceholders(command, event, killer);
+            command = command.replace("{player}", playerName).replace("{killer}", killerName).replace("{weapon}", weaponName).replace("{mob}", mobName);
             getServer().dispatchCommand(getServer().getConsoleSender(), command);
         }
-    }
-
-    private List<String> getCommandsForDeathEvent(Entity killer, PlayerDeathEvent event) {
-        if (killer instanceof Player) {
-            return getConfig().getStringList("commands.PLAYER_KILL");
-        } else {
-            String causeOfDeath = event.getEntity().getLastDamageCause().getCause().name();
-            return getConfig().getStringList("commands." + causeOfDeath);
-        }
-    }
-
-    private String processCommandPlaceholders(String command, PlayerDeathEvent event, Entity killer) {
-        String playerName = event.getEntity().getName();
-        String killerName = killer != null ? killer.getName() : "unknown";
-        String mobDisplayName = killer != null ? killer.getCustomName() : "unknown";
-        if (mobDisplayName == null) {
-            mobDisplayName = killer.getType().name();
-        }
-
-        return command.replace("{player}", playerName)
-                .replace("{killer}", killerName)
-                .replace("{mobdisplayname}", mobDisplayName);
     }
 }
