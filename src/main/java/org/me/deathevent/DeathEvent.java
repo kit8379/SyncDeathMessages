@@ -3,7 +3,6 @@ package org.me.deathevent;
 import net.md_5.bungee.api.chat.BaseComponent;
 import net.md_5.bungee.api.chat.TextComponent;
 import net.md_5.bungee.api.chat.TranslatableComponent;
-import org.bukkit.ChatColor;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -23,6 +22,7 @@ public class DeathEvent extends JavaPlugin implements Listener {
         getServer().getPluginManager().registerEvents(this, this);
     }
 
+
     @EventHandler(priority = EventPriority.HIGH)
     public void onPlayerDeath(PlayerDeathEvent event) {
         Player player = event.getEntity();
@@ -30,34 +30,42 @@ public class DeathEvent extends JavaPlugin implements Listener {
         String playerName = player.getDisplayName();
 
         if (killer != null) {
-            ItemStack weapon = killer.getInventory().getItemInMainHand();
-            boolean hasWeaponDisplayName = weapon.hasItemMeta() && Objects.requireNonNull(weapon.getItemMeta()).hasDisplayName();
-            String messagePath = "messages.PLAYER_KILL." + (hasWeaponDisplayName ? "with_weapon" : "default");
-            String message = ChatColor.translateAlternateColorCodes('&', getConfig().getString(messagePath))
-                    .replace("{player}", playerName)
-                    .replace("{killer}", killer.getDisplayName());
-            if (hasWeaponDisplayName) {
-                message = message.replace("{weapon}", weapon.getItemMeta().getDisplayName());
-                broadcastMessage(message);
-            } else {
-                sendTranslatableMessage("item.minecraft." + weapon.getType().getKey().getKey(), message, "{weapon}");
-            }
+            handlePlayerKill(playerName, killer);
         } else if (event.getEntity().getLastDamageCause() instanceof EntityDamageByEntityEvent damageEvent) {
-            Entity damager = damageEvent.getDamager();
-            String message = ChatColor.translateAlternateColorCodes('&', getConfig().getString("messages.ENTITY_ATTACK.default"))
-                    .replace("{player}", playerName);
-            if (damager.getCustomName() != null) {
-                message = message.replace("{mob}", damager.getCustomName());
-                broadcastMessage(message);
-            } else {
-                sendTranslatableMessage("entity.minecraft." + damager.getType().getKey().getKey(), message, "{mob}");
-            }
+            handleEntityAttack(playerName, damageEvent);
         } else {
-            String causeOfDeathKey = player.getLastDamageCause() != null ? player.getLastDamageCause().getCause().name() : "UNKNOWN";
-            String message = ChatColor.translateAlternateColorCodes('&', getConfig().getString("messages." + causeOfDeathKey + ".default"))
-                    .replace("{player}", playerName);
-            broadcastMessage(message);
+            handleOtherDeaths(playerName, event);
         }
+    }
+
+    private void handlePlayerKill(String playerName, Player killer) {
+        ItemStack weapon = killer.getInventory().getItemInMainHand();
+        boolean hasWeaponDisplayName = weapon.hasItemMeta() && Objects.requireNonNull(weapon.getItemMeta()).hasDisplayName();
+        String messageKey = "message.PLAYER_KILL." + (hasWeaponDisplayName ? "with_weapon" : "default");
+        String message = Objects.requireNonNull(getConfig().getString(messageKey)).replace("{player}", playerName).replace("{killer}", killer.getDisplayName());
+        if (hasWeaponDisplayName) {
+            message = message.replace("{weapon}", weapon.getItemMeta().getDisplayName());
+            broadcastMessage(message);
+        } else {
+            sendTranslatableMessage("item.minecraft." + weapon.getType().getKey().getKey(), message, "{weapon}");
+        }
+    }
+
+    private void handleEntityAttack(String playerName, EntityDamageByEntityEvent damageEvent) {
+        Entity damager = damageEvent.getDamager();
+        String message = Objects.requireNonNull(getConfig().getString("message.ENTITY_ATTACK.default")).replace("{player}", playerName);
+        if (damager.getCustomName() != null) {
+            message = message.replace("{mob}", damager.getCustomName());
+            broadcastMessage(message);
+        } else {
+            sendTranslatableMessage("entity.minecraft." + damager.getType().getKey().getKey(), message, "{mob}");
+        }
+    }
+
+    private void handleOtherDeaths(String playerName, PlayerDeathEvent event) {
+        String causeOfDeathKey = event.getEntity().getLastDamageCause() != null ? event.getEntity().getLastDamageCause().getCause().name() : "UNKNOWN";
+        String message = Objects.requireNonNull(getConfig().getString("message." + causeOfDeathKey + ".default")).replace("{player}", playerName);
+        broadcastMessage(message);
     }
 
     private void sendTranslatableMessage(String translateKey, String messageTemplate, String placeholder) {
@@ -72,9 +80,7 @@ public class DeathEvent extends JavaPlugin implements Listener {
         }
     }
 
-
     private void broadcastMessage(String message) {
-        String translatedMessage = ChatColor.translateAlternateColorCodes('&', message);
-        getServer().broadcastMessage(translatedMessage);
+        getServer().broadcastMessage(message);
     }
 }
