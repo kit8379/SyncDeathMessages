@@ -32,6 +32,10 @@ public class DeathEvent extends JavaPlugin implements Listener {
             messageKey = !weaponName.isEmpty() ? "with_weapon" : "default";
             List<String> commands = getConfig().getStringList("commands.PLAYER_KILL." + messageKey);
             executeCommands(commands, playerName, killerPlayer.getName(), weaponName, "");
+        } else if (killer != null) {
+            String mobName = killer.getCustomName() != null ? killer.getCustomName() : killer.getType().name();
+            List<String> commands = getConfig().getStringList("commands.ENTITY_ATTACK." + messageKey);
+            executeCommands(commands, playerName, "", "", mobName);
         } else {
             String causeOfDeath = player.getLastDamageCause() != null ? player.getLastDamageCause().getCause().name() : "UNKNOWN";
             List<String> commands = getConfig().getStringList("commands." + causeOfDeath + "." + messageKey);
