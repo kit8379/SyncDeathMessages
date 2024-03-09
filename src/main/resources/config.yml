@@ -1,69 +1,69 @@
-commands:
+messages:
   PLAYER_KILL:
     default:
-      - "say &c{player} &e被 &a{killer} &e擊殺了 😵"
+      - "&c{player} &e被 &a{killer} &e擊殺了 😵"
     with_weapon:
-      - "say &c{player} &e被 &a{killer} &e使用 &r{weapon} &e擊殺了 🔪"
+      - "&c{player} &e被 &a{killer} &e使用 &r{weapon} &e擊殺了 🔪"
   ENTITY_ATTACK:
     default:
-      - "say &c{player} &e被 &a{mob} &e攻擊而死 💀"
+      - "&c{player} &e被 &a{mob} &e攻擊而死 💀"
   PROJECTILE:
     default:
-      - "say &c{player} &e被飛射物擊中身亡 🏹"
+      - "&c{player} &e被飛射物擊中身亡 🏹"
   SUFFOCATION:
     default:
-      - "say &c{player} &e窒息而亡 😵"
+      - "&c{player} &e窒息而亡 😵"
   FALL:
     default:
-      - "say &c{player} &e墜落身亡 🕳️"
+      - "&c{player} &e墜落身亡 🕳️"
   FIRE:
     default:
-      - "say &c{player} &e被火燒死了 🔥"
+      - "&c{player} &e被火燒死了&r 🔥"
   FIRE_TICK:
     default:
-      - "say &c{player} &e被火燒死了 🔥"
+      - "&c{player} &e被火燒死了&r 🔥"
   MELTING:
     default:
-      - "say &c{player} &e融化了 🌞"
+      - "&c{player} &e融化了&r 🌞"
   LAVA:
     default:
-      - "say &c{player} &e被熔岩燒死了 🌋"
+      - "&c{player} &e被熔岩燒死了&r 🌋"
   DROWNING:
     default:
-      - "say &c{player} &e溺水而亡 🌊"
+      - "&c{player} &e溺水而亡&r 🌊"
   BLOCK_EXPLOSION:
     default:
-      - "say &c{player} &e被爆炸炸死了 💣"
+      - "&c{player} &e被爆炸炸死了&r 💣"
   ENTITY_EXPLOSION:
     default:
-      - "say &c{player} &e被爆炸炸死了 💣"
+      - "&c{player} &e被爆炸炸死了&r 💣"
   VOID:
     default:
-      - "say &c{player} &e掉出世界外了 🕳️"
+      - "&c{player} &e掉出世界外了&r 🕳️"
   LIGHTNING:
     default:
-      - "say &c{player} &e被閃電擊中了 ⚡"
+      - "&c{player} &e被閃電擊中了&r ⚡"
   SUICIDE:
     default:
-      - "say &c{player} &e自殺了 😔"
+      - "&c{player} &e自殺了&r 😔"
   STARVATION:
     default:
-      - "say &c{player} &e餓死了 🍽️"
+      - "&c{player} &e餓死了&r 🍽️"
   POISON:
     default:
-      - "say &c{player} &e被毒死了 ☠️"
+      - "&c{player} &e被毒死了&r ☠️"
   MAGIC:
     default:
-      - "say &c{player} &e被魔法殺死了 ✨"
+      - "&c{player} &e被魔法殺死了&r ✨"
   WITHER:
     default:
-      - "say &c{player} &e凋零而亡 💀"
+      - "&c{player} &e凋零而亡&r 💀"
   FALLING_BLOCK:
     default:
-      - "say &c{player} &e被落下的方塊壓死了 🧱"
+      - "&c{player} &e被落下的方塊壓死了&r 🧱"
   THORNS:
     default:
-      - "say &c{player} &e被荊棘刺死了 🌵"
+      - "&c{player} &e被荊棘刺死了&r 🌵"
   UNKNOWN:
     default:
-      - "say &c{player} &e因未知原因死亡 ❓"
+      - "&c{player} &e因未知原因死亡&r ❓"
