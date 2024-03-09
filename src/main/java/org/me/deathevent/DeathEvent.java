@@ -41,7 +41,7 @@ public class DeathEvent extends JavaPlugin implements Listener {
     private void handlePlayerKill(String playerName, Player killer) {
         ItemStack weapon = killer.getInventory().getItemInMainHand();
         boolean hasWeaponDisplayName = weapon.hasItemMeta() && Objects.requireNonNull(weapon.getItemMeta()).hasDisplayName();
-        String messageKey = "message.PLAYER_KILL." + (hasWeaponDisplayName ? "with_weapon" : "default");
+        String messageKey = "messages.PLAYER_KILL." + (hasWeaponDisplayName ? "with_weapon" : "default");
         String message = Objects.requireNonNull(getConfig().getString(messageKey)).replace("{player}", playerName).replace("{killer}", killer.getDisplayName());
         if (hasWeaponDisplayName) {
             message = message.replace("{weapon}", weapon.getItemMeta().getDisplayName());
@@ -53,7 +53,7 @@ public class DeathEvent extends JavaPlugin implements Listener {
 
     private void handleEntityAttack(String playerName, EntityDamageByEntityEvent damageEvent) {
         Entity damager = damageEvent.getDamager();
-        String message = Objects.requireNonNull(getConfig().getString("message.ENTITY_ATTACK.default")).replace("{player}", playerName);
+        String message = Objects.requireNonNull(getConfig().getString("messages.ENTITY_ATTACK.default")).replace("{player}", playerName);
         if (damager.getCustomName() != null) {
             message = message.replace("{mob}", damager.getCustomName());
             broadcastMessage(message);
@@ -64,7 +64,7 @@ public class DeathEvent extends JavaPlugin implements Listener {
 
     private void handleOtherDeaths(String playerName, PlayerDeathEvent event) {
         String causeOfDeathKey = event.getEntity().getLastDamageCause() != null ? event.getEntity().getLastDamageCause().getCause().name() : "UNKNOWN";
-        String message = Objects.requireNonNull(getConfig().getString("message." + causeOfDeathKey + ".default")).replace("{player}", playerName);
+        String message = Objects.requireNonNull(getConfig().getString("messages." + causeOfDeathKey + ".default")).replace("{player}", playerName);
         broadcastMessage(message);
     }
 
