@@ -22,7 +22,7 @@ public class RedisHandler {
 
     public void publish(String channel, String message) {
         CompletableFuture.runAsync(() -> {
-            try (Jedis jedis = getJedis()) {
+            try (Jedis jedis = jedisPool.getResource()) {
                 jedis.publish(channel, message);
             }
         });
@@ -30,14 +30,10 @@ public class RedisHandler {
 
     public void subscribe(JedisPubSub pubSub, String channel) {
         CompletableFuture.runAsync(() -> {
-            try (Jedis jedis = getJedis()) {
+            try (Jedis jedis = jedisPool.getResource()) {
                 jedis.subscribe(pubSub, channel);
             }
         });
-    }
-
-    private Jedis getJedis() {
-        return jedisPool.getResource();
     }
 
     public void disconnect() {
