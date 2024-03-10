@@ -9,12 +9,9 @@ import org.me.deathevent.redis.RedisPublisher;
 import org.me.deathevent.redis.RedisSubscriber;
 
 import java.util.Objects;
-import java.util.logging.Logger;
 
 public class DeathEvent extends JavaPlugin {
 
-    private Logger logger;
-    private FileConfiguration config;
     private RedisHandler redisHandler;
 
     @Override
@@ -25,8 +22,7 @@ public class DeathEvent extends JavaPlugin {
     }
 
     public void initalize() {
-        logger = getLogger();
-        config = getConfig();
+        FileConfiguration config = getConfig();
 
         // Initialize RedisHandler
         redisHandler = new RedisHandler(this, config.getString("redis.host"), config.getInt("redis.port"), config.getString("redis.password"));
@@ -42,10 +38,10 @@ public class DeathEvent extends JavaPlugin {
         redisSubscriber.subscribeToChannel(channel);
 
         // Register the DeathEventListener with the RedisPublisher
-        getServer().getPluginManager().registerEvents(new DeathEventListener(this, redisPublisher), this);
+        this.getServer().getPluginManager().registerEvents(new DeathEventListener(this, redisPublisher), this);
 
         // Register the /deathevent reload command
-        Objects.requireNonNull(getCommand("deathevent")).setExecutor(new ReloadCommand(this));
+        Objects.requireNonNull(this.getCommand("deatheventreload")).setExecutor(new ReloadCommand(this));
     }
 
     @Override
@@ -71,10 +67,10 @@ public class DeathEvent extends JavaPlugin {
     }
 
     public void info(String message) {
-        logger.info(message);
+        getLogger().info(message);
     }
 
     public void debug(String message) {
-        logger.info(message);
+        getLogger().info(message);
     }
 }

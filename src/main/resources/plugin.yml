@@ -3,3 +3,8 @@ version: '${project.version}'
 main: org.me.deathevent.DeathEvent
 api-version: 1.19
 author: kit8379
+commands:
+  deatheventreload:
+    description: Reloads the DeathEvent plugin
+    usage: /<command>
+    permission: deathevent.admin

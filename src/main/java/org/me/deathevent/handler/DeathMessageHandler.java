@@ -54,6 +54,7 @@ public class DeathMessageHandler {
         boolean hasWeapon = weapon.getType() != Material.AIR;
         String messageKey = "messages.PLAYER_KILL." + (hasWeapon ? "with_weapon" : "default");
         List<String> messages = plugin.getConfig().getStringList(messageKey);
+
         String message = getRandomMessage(messages).replace("{player}", playerName).replace("{killer}", killer.getDisplayName());
         if (hasWeapon) {
             String weaponName = weapon.hasItemMeta() && Objects.requireNonNull(weapon.getItemMeta()).hasDisplayName() ? weapon.getItemMeta().getDisplayName() : "item.minecraft." + weapon.getType().getKey().getKey();
@@ -66,14 +67,14 @@ public class DeathMessageHandler {
     private void handleEntityAttack(String playerName, EntityDamageByEntityEvent damageEvent) {
         Entity damager = damageEvent.getDamager();
         List<String> messages = plugin.getConfig().getStringList("messages.ENTITY_ATTACK.default");
-        String message = getRandomMessage(messages).replace("{player}", playerName);
 
+        String message = getRandomMessage(messages).replace("{player}", playerName);
         if (damager.getCustomName() != null) {
             message = message.replace("{mob}", damager.getCustomName());
+            sendJsonMessage(message);
         } else {
             sendTranslatableMessage("entity.minecraft." + damager.getType().getKey().getKey(), message, "{mob}");
         }
-        sendJsonMessage(message);
     }
 
     private void handleOtherDeaths(String playerName, PlayerDeathEvent event) {
