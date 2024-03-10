@@ -13,6 +13,9 @@ import java.util.Objects;
 public class DeathEvent extends JavaPlugin {
 
     private RedisHandler redisHandler;
+    private RedisPublisher redisPublisher;
+    private RedisSubscriber redisSubscriber;
+    private String channel;
 
     @Override
     public void onEnable() {
@@ -28,19 +31,15 @@ public class DeathEvent extends JavaPlugin {
         redisHandler = new RedisHandler(this, config.getString("redis.host"), config.getInt("redis.port"), config.getString("redis.password"));
 
         // Get the server-group from the config
-        String channel = "deathmessages-" + config.getString("server-group");
+        channel = "deathmessages-" + config.getString("server-group");
 
         // Initialize RedisPublisher and RedisSubscriber
-        RedisPublisher redisPublisher = new RedisPublisher(this, redisHandler, channel);
-        RedisSubscriber redisSubscriber = new RedisSubscriber(this, redisHandler);
-
+        this.redisPublisher = new RedisPublisher(this, redisHandler, channel);
+        this.redisSubscriber = new RedisSubscriber(this, redisHandler);
         // Subscribe to the deathMessages channel
         redisSubscriber.subscribeToChannel(channel);
 
-        // Register the DeathEventListener with the RedisPublisher
         this.getServer().getPluginManager().registerEvents(new DeathEventListener(this, redisPublisher), this);
-
-        // Register the /deathevent reload command
         Objects.requireNonNull(this.getCommand("deatheventreload")).setExecutor(new ReloadCommand(this));
     }
 
@@ -52,6 +51,11 @@ public class DeathEvent extends JavaPlugin {
     }
 
     public void shutdown() {
+        // Unsubscribe from the deathMessages channel
+        if (redisSubscriber != null) {
+            redisSubscriber.unsubscribeFromChannel(channel);
+        }
+
         // Disconnect from Redis
         if (redisHandler != null) {
             redisHandler.disconnect();
@@ -59,11 +63,9 @@ public class DeathEvent extends JavaPlugin {
     }
 
     public void reload() {
-        info("DeathEvent is reloading...");
-        shutdown();
+        info("DeathEvent config is reloading...");
         reloadConfig();
-        initalize();
-        info("DeathEvent has reloaded successfully!");
+        info("DeathEvent config has reloaded successfully!");
     }
 
     public void info(String message) {

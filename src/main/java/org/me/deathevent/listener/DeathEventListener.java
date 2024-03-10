@@ -20,7 +20,7 @@ public class DeathEventListener implements Listener {
 
     @EventHandler(priority = EventPriority.HIGH)
     public void onPlayerDeath(PlayerDeathEvent event) {
-        messageHandler.handleDeathEvent(event);
         plugin.debug("Death event handled");
+        messageHandler.handleDeathEvent(event);
     }
 }

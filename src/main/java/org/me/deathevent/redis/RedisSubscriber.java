@@ -10,6 +10,7 @@ public class RedisSubscriber {
 
     private final RedisHandler redisHandler;
     private final DeathEvent plugin;
+    private JedisPubSub pubSub;
 
     public RedisSubscriber(DeathEvent plugin, RedisHandler redisHandler) {
         this.plugin = plugin;
@@ -17,7 +18,7 @@ public class RedisSubscriber {
     }
 
     public void subscribeToChannel(String channel) {
-        JedisPubSub pubSub = new JedisPubSub() {
+        pubSub = new JedisPubSub() {
             @Override
             public void onMessage(String channel, String message) {
                 plugin.debug("Received message from Redis: " + message);
@@ -32,5 +33,12 @@ public class RedisSubscriber {
 
         redisHandler.subscribe(pubSub, channel);
         plugin.debug("Subscribed to Redis channel: " + channel);
+    }
+
+    public void unsubscribeFromChannel(String channel) {
+        if (pubSub != null) {
+            pubSub.unsubscribe(channel);
+            plugin.debug("Unsubscribed from Redis channel: " + channel);
+        }
     }
 }
