@@ -1,105 +1,80 @@
 package org.me.deathevent;
 
-import net.md_5.bungee.api.chat.BaseComponent;
-import net.md_5.bungee.api.chat.HoverEvent;
-import net.md_5.bungee.api.chat.TextComponent;
-import net.md_5.bungee.api.chat.TranslatableComponent;
-import net.md_5.bungee.api.chat.hover.content.Text;
-import org.bukkit.entity.Entity;
-import org.bukkit.entity.Player;
-import org.bukkit.event.EventHandler;
-import org.bukkit.event.EventPriority;
-import org.bukkit.event.Listener;
-import org.bukkit.event.entity.EntityDamageByEntityEvent;
-import org.bukkit.event.entity.PlayerDeathEvent;
-import org.bukkit.inventory.ItemStack;
+import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.me.deathevent.util.Utils;
+import org.me.deathevent.command.ReloadCommand;
+import org.me.deathevent.listener.DeathEventListener;
+import org.me.deathevent.redis.RedisHandler;
+import org.me.deathevent.redis.RedisPublisher;
+import org.me.deathevent.redis.RedisSubscriber;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
-import java.util.Random;
-import java.util.regex.Pattern;
+import java.util.logging.Logger;
 
-public class DeathEvent extends JavaPlugin implements Listener {
-    private final Random random = new Random();
+public class DeathEvent extends JavaPlugin {
+
+    private Logger logger;
+    private FileConfiguration config;
+    private RedisHandler redisHandler;
 
     @Override
     public void onEnable() {
-        getServer().getPluginManager().registerEvents(this, this);
+        info("DeathEvent is starting up...");
+        initalize();
+        info("DeathEvent has started successfully!");
     }
 
-    @EventHandler(priority = EventPriority.HIGH)
-    public void onPlayerDeath(PlayerDeathEvent event) {
-        Player player = event.getEntity();
-        Player killer = player.getKiller();
-        String playerName = player.getDisplayName();
+    public void initalize() {
+        logger = getLogger();
+        config = getConfig();
 
-        if (killer != null) {
-            handlePlayerKill(playerName, killer);
-        } else if (event.getEntity().getLastDamageCause() instanceof EntityDamageByEntityEvent damageEvent) {
-            handleEntityAttack(playerName, damageEvent);
-        } else {
-            handleOtherDeaths(playerName, event);
+        // Initialize RedisHandler
+        redisHandler = new RedisHandler(this, config.getString("redis.host"), config.getInt("redis.port"), config.getString("redis.password"));
+
+        // Get the server-group from the config
+        String channel = "deathmessages-" + config.getString("server-group");
+
+        // Initialize RedisPublisher and RedisSubscriber
+        RedisPublisher redisPublisher = new RedisPublisher(this, redisHandler, channel);
+        RedisSubscriber redisSubscriber = new RedisSubscriber(this, redisHandler);
+
+        // Subscribe to the deathMessages channel
+        redisSubscriber.subscribeToChannel(channel);
+
+        // Register the DeathEventListener with the RedisPublisher
+        getServer().getPluginManager().registerEvents(new DeathEventListener(this, redisPublisher), this);
+
+        // Register the /deathevent reload command
+        Objects.requireNonNull(getCommand("deathevent")).setExecutor(new ReloadCommand(this));
+    }
+
+    @Override
+    public void onDisable() {
+        info("DeathEvent is shutting down...");
+        shutdown();
+        info("DeathEvent has shut down successfully!");
+    }
+
+    public void shutdown() {
+        // Disconnect from Redis
+        if (redisHandler != null) {
+            redisHandler.disconnect();
         }
     }
 
-    private void handlePlayerKill(String playerName, Player killer) {
-        ItemStack weapon = killer.getInventory().getItemInMainHand();
-        boolean hasWeaponDisplayName = weapon.hasItemMeta() && Objects.requireNonNull(weapon.getItemMeta()).hasDisplayName();
-        String messageKey = "messages.PLAYER_KILL." + (hasWeaponDisplayName ? "with_weapon" : "default");
-        List<String> messages = getConfig().getStringList(messageKey);
-        String message = getRandomMessage(messages).replace("{player}", playerName).replace("{killer}", killer.getDisplayName());
-        if (hasWeaponDisplayName) {
-            TextComponent weaponComponent = new TextComponent(weapon.getItemMeta().getDisplayName());
-            weaponComponent.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_ITEM, new Text(weapon.getItemMeta().toString())));
-            message = message.replace("{weapon}", weaponComponent.toLegacyText());
-            broadcastMessage(message);
-        } else {
-            sendTranslatableMessage("item.minecraft." + weapon.getType().getKey().getKey(), message, "{weapon}");
-        }
+    public void reload() {
+        info("DeathEvent is reloading...");
+        shutdown();
+        reloadConfig();
+        initalize();
+        info("DeathEvent has reloaded successfully!");
     }
 
-    private void handleEntityAttack(String playerName, EntityDamageByEntityEvent damageEvent) {
-        Entity damager = damageEvent.getDamager();
-        List<String> messages = getConfig().getStringList("messages.ENTITY_ATTACK.default");
-        String message = getRandomMessage(messages).replace("{player}", playerName);
-        if (damager.getCustomName() != null) {
-            message = message.replace("{mob}", damager.getCustomName());
-            broadcastMessage(message);
-        } else {
-            sendTranslatableMessage("entity.minecraft." + damager.getType().getKey().getKey(), message, "{mob}");
-        }
+    public void info(String message) {
+        logger.info(message);
     }
 
-    private void handleOtherDeaths(String playerName, PlayerDeathEvent event) {
-        String causeOfDeathKey = event.getEntity().getLastDamageCause() != null ? event.getEntity().getLastDamageCause().getCause().name() : "UNKNOWN";
-        List<String> messages = getConfig().getStringList("messages." + causeOfDeathKey + ".default");
-        String message = getRandomMessage(messages).replace("{player}", playerName);
-        broadcastMessage(message);
-    }
-
-    private void sendTranslatableMessage(String translateKey, String messageTemplate, String placeholder) {
-        List<BaseComponent> components = new ArrayList<>();
-        String[] parts = messageTemplate.split(Pattern.quote(placeholder));
-        for (int i = 0; i < parts.length; i++) {
-            if (i > 0) {
-                components.add(new TranslatableComponent(translateKey));
-            }
-            components.add(new TextComponent(parts[i]));
-        }
-        BaseComponent[] finalMessage = components.toArray(new BaseComponent[0]);
-        for (Player onlinePlayer : getServer().getOnlinePlayers()) {
-            onlinePlayer.spigot().sendMessage(finalMessage);
-        }
-    }
-
-    private void broadcastMessage(String message) {
-        getServer().broadcastMessage(Utils.colorize(message));
-    }
-
-    private String getRandomMessage(List<String> messages) {
-        return messages.get(random.nextInt(messages.size()));
+    public void debug(String message) {
+        logger.info(message);
     }
 }

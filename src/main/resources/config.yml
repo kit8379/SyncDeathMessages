@@ -1,21 +1,28 @@
+server-group: default
+
+redis:
+  host: localhost
+  port: 6379
+  password: ""
+
 messages:
   PLAYER_KILL:
     default:
-      - "&c{player} &e被 &a{killer} &e擊殺了 😵"
+      - "&c{player} &e被 &a{killer} &e擊殺了&r 😵"
     with_weapon:
-      - "&c{player} &e被 &a{killer} &e使用 &r{weapon} &e擊殺了 🔪"
+      - "&c{player} &e被 &a{killer} &e使用 &r{weapon} &e擊殺了&r 🔪"
   ENTITY_ATTACK:
     default:
-      - "&c{player} &e被 &a{mob} &e攻擊而死 💀"
+      - "&c{player} &e被 &a{mob} &e攻擊而死&r 💀"
   PROJECTILE:
     default:
-      - "&c{player} &e被飛射物擊中身亡 🏹"
+      - "&c{player} &e被飛射物擊中身亡&r 🏹"
   SUFFOCATION:
     default:
-      - "&c{player} &e窒息而亡 😵"
+      - "&c{player} &e窒息而亡&r 😵"
   FALL:
     default:
-      - "&c{player} &e墜落身亡 🕳️"
+      - "&c{player} &e墜落身亡&r 🕳️"
   FIRE:
     default:
       - "&c{player} &e被火燒死了&r 🔥"
