@@ -18,7 +18,7 @@ public class DeathEventListener implements Listener {
         this.messageHandler = new DeathMessageHandler(plugin, redisPublisher);
     }
 
-    @EventHandler(priority = EventPriority.HIGH)
+    @EventHandler
     public void onPlayerDeath(PlayerDeathEvent event) {
         plugin.debug("Death event handled");
         messageHandler.handleDeathEvent(event);
