@@ -1,8 +1,10 @@
 package org.me.deathevent.handler;
 
 import net.md_5.bungee.api.chat.BaseComponent;
+import net.md_5.bungee.api.chat.HoverEvent;
 import net.md_5.bungee.api.chat.TextComponent;
 import net.md_5.bungee.api.chat.TranslatableComponent;
+import net.md_5.bungee.api.chat.hover.content.Text;
 import net.md_5.bungee.chat.ComponentSerializer;
 import org.bukkit.Material;
 import org.bukkit.entity.Entity;
@@ -57,8 +59,21 @@ public class DeathMessageHandler {
 
         String message = getRandomMessage(messages).replace("{player}", playerName).replace("{killer}", killer.getDisplayName());
         if (hasWeapon) {
-            String weaponName = weapon.hasItemMeta() && Objects.requireNonNull(weapon.getItemMeta()).hasDisplayName() ? weapon.getItemMeta().getDisplayName() : "item.minecraft." + weapon.getType().getKey().getKey();
-            sendTranslatableMessage(weaponName, message, "{weapon}");
+            String weaponKey = weapon.hasItemMeta() && Objects.requireNonNull(weapon.getItemMeta()).hasDisplayName() ? weapon.getItemMeta().getDisplayName() : "item.minecraft." + weapon.getType().getKey().getKey();
+            TranslatableComponent weaponComponent = new TranslatableComponent(weaponKey);
+
+            if (weapon.hasItemMeta() && Objects.requireNonNull(weapon.getItemMeta()).hasLore()) {
+                List<String> lore = weapon.getItemMeta().getLore();
+                StringBuilder hoverText = new StringBuilder(weaponKey);
+                if (lore != null) {
+                    for (String line : lore) {
+                        hoverText.append("\n").append(line);
+                    }
+                }
+                weaponComponent.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new Text(hoverText.toString())));
+            }
+
+            sendTranslatableMessage(weaponComponent, message, "{weapon}");
         } else {
             sendJsonMessage(message);
         }
@@ -73,9 +88,11 @@ public class DeathMessageHandler {
             message = message.replace("{mob}", damager.getCustomName());
             sendJsonMessage(message);
         } else {
-            sendTranslatableMessage("entity.minecraft." + damager.getType().getKey().getKey(), message, "{mob}");
+            TranslatableComponent mobComponent = new TranslatableComponent("entity.minecraft." + damager.getType().getKey().getKey());
+            sendTranslatableMessage(mobComponent, message, "{mob}");
         }
     }
+
 
     private void handleOtherDeaths(String playerName, PlayerDeathEvent event) {
         String causeOfDeathKey = event.getEntity().getLastDamageCause() != null ? event.getEntity().getLastDamageCause().getCause().name() : "UNKNOWN";
@@ -84,12 +101,12 @@ public class DeathMessageHandler {
         sendJsonMessage(message);
     }
 
-    private void sendTranslatableMessage(String translateKey, String messageTemplate, String placeholder) {
+    private void sendTranslatableMessage(BaseComponent translateComponent, String messageTemplate, String placeholder) {
         List<BaseComponent> components = new ArrayList<>();
         String[] parts = messageTemplate.split(Pattern.quote(placeholder));
         for (int i = 0; i < parts.length; i++) {
             if (i > 0) {
-                components.add(new TranslatableComponent(translateKey));
+                components.add(translateComponent);
             }
             components.add(new TextComponent(Utils.colorize(parts[i])));
         }
