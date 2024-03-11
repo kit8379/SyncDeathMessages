@@ -1,16 +1,16 @@
-package org.me.deathevent;
+package org.me.syncdeathmessages;
 
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.me.deathevent.command.ReloadCommand;
-import org.me.deathevent.listener.DeathEventListener;
-import org.me.deathevent.redis.RedisHandler;
-import org.me.deathevent.redis.RedisPublisher;
-import org.me.deathevent.redis.RedisSubscriber;
+import org.me.syncdeathmessages.command.ReloadCommand;
+import org.me.syncdeathmessages.listener.DeathEventListener;
+import org.me.syncdeathmessages.redis.RedisHandler;
+import org.me.syncdeathmessages.redis.RedisPublisher;
+import org.me.syncdeathmessages.redis.RedisSubscriber;
 
 import java.util.Objects;
 
-public class DeathEvent extends JavaPlugin {
+public class SyncDeathMessages extends JavaPlugin {
 
     private RedisHandler redisHandler;
     private RedisPublisher redisPublisher;
@@ -19,9 +19,9 @@ public class DeathEvent extends JavaPlugin {
 
     @Override
     public void onEnable() {
-        info("DeathEvent is starting up...");
+        info("SyncDeathMessages is starting up...");
         initalize();
-        info("DeathEvent has started successfully!");
+        info("SyncDeathMessages has started successfully!");
     }
 
     public void initalize() {
@@ -45,9 +45,9 @@ public class DeathEvent extends JavaPlugin {
 
     @Override
     public void onDisable() {
-        info("DeathEvent is shutting down...");
+        info("SyncDeathMessages is shutting down...");
         shutdown();
-        info("DeathEvent has shut down successfully!");
+        info("SyncDeathMessages has shut down successfully!");
     }
 
     public void shutdown() {
@@ -63,9 +63,9 @@ public class DeathEvent extends JavaPlugin {
     }
 
     public void reload() {
-        info("DeathEvent config is reloading...");
+        info("SyncDeathMessages config is reloading...");
         reloadConfig();
-        info("DeathEvent config has reloaded successfully!");
+        info("SyncDeathMessages config has reloaded successfully!");
     }
 
     public void info(String message) {

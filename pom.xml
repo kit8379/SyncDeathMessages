@@ -5,11 +5,11 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>org.me</groupId>
-    <artifactId>DeathEvent</artifactId>
+    <artifactId>SyncDeathMessages</artifactId>
     <version>1.0</version>
     <packaging>jar</packaging>
 
-    <name>DeathEvent</name>
+    <name>SyncDeathMessages</name>
 
     <properties>
         <java.version>11</java.version>

@@ -1,18 +1,18 @@
-package org.me.deathevent.redis;
+package org.me.syncdeathmessages.redis;
 
 import net.md_5.bungee.api.chat.BaseComponent;
 import net.md_5.bungee.chat.ComponentSerializer;
 import org.bukkit.entity.Player;
-import org.me.deathevent.DeathEvent;
+import org.me.syncdeathmessages.SyncDeathMessages;
 import redis.clients.jedis.JedisPubSub;
 
 public class RedisSubscriber {
 
     private final RedisHandler redisHandler;
-    private final DeathEvent plugin;
+    private final SyncDeathMessages plugin;
     private JedisPubSub pubSub;
 
-    public RedisSubscriber(DeathEvent plugin, RedisHandler redisHandler) {
+    public RedisSubscriber(SyncDeathMessages plugin, RedisHandler redisHandler) {
         this.plugin = plugin;
         this.redisHandler = redisHandler;
     }

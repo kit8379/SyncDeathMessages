@@ -1,10 +1,10 @@
-name: DeathEvent
+name: SyncDeathMessages
 version: '${project.version}'
-main: org.me.deathevent.DeathEvent
+main: org.me.syncdeathmessages.SyncDeathMessages
 api-version: 1.19
 author: kit8379
 commands:
-  deatheventreload:
-    description: Reloads the DeathEvent plugin
+  sdmreload:
+    description: Reloads the plugin
     usage: /<command>
-    permission: deathevent.admin
+    permission: syncdeathmessages.admin

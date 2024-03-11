@@ -1,4 +1,4 @@
-package org.me.deathevent.util;
+package org.me.syncdeathmessages.util;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;

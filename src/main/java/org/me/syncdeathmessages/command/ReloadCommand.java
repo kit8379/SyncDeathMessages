@@ -1,15 +1,15 @@
-package org.me.deathevent.command;
+package org.me.syncdeathmessages.command;
 
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
-import org.me.deathevent.DeathEvent;
+import org.me.syncdeathmessages.SyncDeathMessages;
 
 public class ReloadCommand implements CommandExecutor {
 
-    private final DeathEvent plugin;
+    private final SyncDeathMessages plugin;
 
-    public ReloadCommand(DeathEvent plugin) {
+    public ReloadCommand(SyncDeathMessages plugin) {
         this.plugin = plugin;
     }
 
@@ -21,7 +21,7 @@ public class ReloadCommand implements CommandExecutor {
         }
 
         plugin.reload();
-        commandSender.sendMessage("DeathEvent configuration reloaded.");
+        commandSender.sendMessage("SyncDeathMessages configuration reloaded.");
         return true;
     }
 }

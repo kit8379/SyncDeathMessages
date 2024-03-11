@@ -1,19 +1,18 @@
-package org.me.deathevent.listener;
+package org.me.syncdeathmessages.listener;
 
 import org.bukkit.event.EventHandler;
-import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.PlayerDeathEvent;
-import org.me.deathevent.DeathEvent;
-import org.me.deathevent.handler.DeathMessageHandler;
-import org.me.deathevent.redis.RedisPublisher;
+import org.me.syncdeathmessages.SyncDeathMessages;
+import org.me.syncdeathmessages.handler.DeathMessageHandler;
+import org.me.syncdeathmessages.redis.RedisPublisher;
 
 public class DeathEventListener implements Listener {
 
-    private final DeathEvent plugin;
+    private final SyncDeathMessages plugin;
     private final DeathMessageHandler messageHandler;
 
-    public DeathEventListener(DeathEvent plugin, RedisPublisher redisPublisher) {
+    public DeathEventListener(SyncDeathMessages plugin, RedisPublisher redisPublisher) {
         this.plugin = plugin;
         this.messageHandler = new DeathMessageHandler(plugin, redisPublisher);
     }
