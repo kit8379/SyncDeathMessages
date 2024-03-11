@@ -1,0 +1,69 @@
+messages:
+  PLAYER_KILL:
+    default:
+      - "&c{player} &eは&a{killer} &eによって殺されました&r 😵"
+    with_weapon:
+      - "&c{player} &eは&a{killer} &eによって &r{weapon} &eで殺されました&r 🔪"
+  ENTITY_ATTACK:
+    default:
+      - "&c{player} &eは&a{mob} &eによって攻撃され死亡しました&r 💀"
+  PROJECTILE:
+    default:
+      - "&c{player} &eは飛び道具によって死亡しました&r 🏹"
+  SUFFOCATION:
+    default:
+      - "&c{player} &eは窒息死しました&r 😵"
+  FALL:
+    default:
+      - "&c{player} &eは落下死しました&r 🕳️"
+  FIRE:
+    default:
+      - "&c{player} &eは火傷により死亡しました&r 🔥"
+  FIRE_TICK:
+    default:
+      - "&c{player} &eは炎のダメージにより死亡しました&r 🔥"
+  MELTING:
+    default:
+      - "&c{player} &eは溶けました&r 🌞"
+  LAVA:
+    default:
+      - "&c{player} &eは溶岩により死亡しました&r 🌋"
+  DROWNING:
+    default:
+      - "&c{player} &eは溺れ死にしました&r 🌊"
+  BLOCK_EXPLOSION:
+    default:
+      - "&c{player} &eは爆発により死亡しました&r 💣"
+  ENTITY_EXPLOSION:
+    default:
+      - "&c{player} &eはエンティティの爆発により死亡しました&r 💣"
+  VOID:
+    default:
+      - "&c{player} &eはワールドから脱落しました&r 🕳️"
+  LIGHTNING:
+    default:
+      - "&c{player} &eは雷に打たれました&r ⚡"
+  SUICIDE:
+    default:
+      - "&c{player} &eは自殺しました&r 😔"
+  STARVATION:
+    default:
+      - "&c{player} &eは飢え死にしました&r 🍽️"
+  POISON:
+    default:
+      - "&c{player} &eは毒により死亡しました&r ☠️"
+  MAGIC:
+    default:
+      - "&c{player} &eは魔法により死亡しました&r ✨"
+  WITHER:
+    default:
+      - "&c{player} &eは衰弱により死亡しました&r 💀"
+  FALLING_BLOCK:
+    default:
+      - "&c{player} &eは落下ブロックにより死亡しました&r 🧱"
+  THORNS:
+    default:
+      - "&c{player} &eは荊棘により死亡しました&r 🌵"
+  UNKNOWN:
+    default:
+      - "&c{player} &eは不明な理由により死亡しました&r ❓"

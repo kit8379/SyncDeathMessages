@@ -1,0 +1,69 @@
+messages:
+  PLAYER_KILL:
+    default:
+      - "تم قتل &c{player} &eبواسطة &a{killer}&r 😵"
+    with_weapon:
+      - "تم قتل &c{player} &eبواسطة &a{killer} &eباستخدام &r{weapon}&r 🔪"
+  ENTITY_ATTACK:
+    default:
+      - "تمت مهاجمة &c{player} &eمن قبل &a{mob} &eوتوفي&r 💀"
+  PROJECTILE:
+    default:
+      - "تعرض &c{player} &eلضربة مؤذية بالقذيفة وتوفي&r 🏹"
+  SUFFOCATION:
+    default:
+      - "توفي &c{player} &eبسبب الاختناق&r 😵"
+  FALL:
+    default:
+      - "توفي &c{player} &eبسبب السقوط&r 🕳️"
+  FIRE:
+    default:
+      - "توفي &c{player} &eبسبب الحريق&r 🔥"
+  FIRE_TICK:
+    default:
+      - "توفي &c{player} &eبسبب الحريق&r 🔥"
+  MELTING:
+    default:
+      - "توفي &c{player} &eبسبب الانصهار&r 🌞"
+  LAVA:
+    default:
+      - "توفي &c{player} &eبسبب الحرق بالحمم&r 🌋"
+  DROWNING:
+    default:
+      - "توفي &c{player} &eبسبب الغرق&r 🌊"
+  BLOCK_EXPLOSION:
+    default:
+      - "توفي &c{player} &eبسبب الانفجار&r 💣"
+  ENTITY_EXPLOSION:
+    default:
+      - "توفي &c{player} &eبسبب انفجار كائن&r 💣"
+  VOID:
+    default:
+      - "خرج &c{player} &eمن العالم&r 🕳️"
+  LIGHTNING:
+    default:
+      - "توفي &c{player} &eبسبب صاعقة&r ⚡"
+  SUICIDE:
+    default:
+      - "انتحر &c{player} &e😔"
+  STARVATION:
+    default:
+      - "توفي &c{player} &eبسبب الجوع&r 🍽️"
+  POISON:
+    default:
+      - "توفي &c{player} &eبسبب التسمم&r ☠️"
+  MAGIC:
+    default:
+      - "توفي &c{player} &eبسبب السحر&r ✨"
+  WITHER:
+    default:
+      - "توفي &c{player} &eبسبب الذبول&r 💀"
+  FALLING_BLOCK:
+    default:
+      - "توفي &c{player} &eبسبب سقوط الكتلة&r 🧱"
+  THORNS:
+    default:
+      - "توفي &c{player} &eبسبب الأشواك&r 🌵"
+  UNKNOWN:
+    default:
+      - "توفي &c{player} &eبسبب أسباب غير معروفة&r ❓"

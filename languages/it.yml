@@ -1,0 +1,69 @@
+messages:
+  PLAYER_KILL:
+    default:
+      - "&c{player} &e è stato ucciso da &a{killer}&r 😵"
+    with_weapon:
+      - "&c{player} &e è stato ucciso da &a{killer} &e usando &r{weapon}&r 🔪"
+  ENTITY_ATTACK:
+    default:
+      - "&c{player} &e è stato attaccato da &a{mob} &e e ucciso&r 💀"
+  PROJECTILE:
+    default:
+      - "&c{player} &e è stato colpito da un proiettile e è morto&r 🏹"
+  SUFFOCATION:
+    default:
+      - "&c{player} &e è morto per soffocamento&r 😵"
+  FALL:
+    default:
+      - "&c{player} &e è morto per caduta&r 🕳️"
+  FIRE:
+    default:
+      - "&c{player} &e è morto bruciato&r 🔥"
+  FIRE_TICK:
+    default:
+      - "&c{player} &e è morto bruciato&r 🔥"
+  MELTING:
+    default:
+      - "&c{player} &e è stato fuso&r 🌞"
+  LAVA:
+    default:
+      - "&c{player} &e è morto bruciato dalla lava&r 🌋"
+  DROWNING:
+    default:
+      - "&c{player} &e è morto annegato&r 🌊"
+  BLOCK_EXPLOSION:
+    default:
+      - "&c{player} &e è morto in un'esplosione&r 💣"
+  ENTITY_EXPLOSION:
+    default:
+      - "&c{player} &e è morto in un'esplosione&r 💣"
+  VOID:
+    default:
+      - "&c{player} &e è caduto fuori dal mondo&r 🕳️"
+  LIGHTNING:
+    default:
+      - "&c{player} &e è stato colpito da un fulmine&r ⚡"
+  SUICIDE:
+    default:
+      - "&c{player} &e si è suicidato&r 😔"
+  STARVATION:
+    default:
+      - "&c{player} &e è morto di fame&r 🍽️"
+  POISON:
+    default:
+      - "&c{player} &e è morto avvelenato&r ☠️"
+  MAGIC:
+    default:
+      - "&c{player} &e è morto per magia&r ✨"
+  WITHER:
+    default:
+      - "&c{player} &e è marcito&r 💀"
+  FALLING_BLOCK:
+    default:
+      - "&c{player} &e è stato schiacciato da un blocco cadente&r 🧱"
+  THORNS:
+    default:
+      - "&c{player} &e è stato ucciso dalle spine&r 🌵"
+  UNKNOWN:
+    default:
+      - "&c{player} &e è morto per motivi sconosciuti&r ❓"

@@ -1,0 +1,69 @@
+messages:
+  PLAYER_KILL:
+    default:
+      - "&c{player} &eбыл убит игроком &a{killer}&r 😵"
+    with_weapon:
+      - "&c{player} &eбыл убит игроком &a{killer} &eс помощью &r{weapon}&r 🔪"
+  ENTITY_ATTACK:
+    default:
+      - "&c{player} &eбыл убит сущностью &a{mob}&r 💀"
+  PROJECTILE:
+    default:
+      - "&c{player} &eбыл убит выстрелом из оружия&r 🏹"
+  SUFFOCATION:
+    default:
+      - "&c{player} &eпогиб от удушья&r 😵"
+  FALL:
+    default:
+      - "&c{player} &eпогиб от падения&r 🕳️"
+  FIRE:
+    default:
+      - "&c{player} &eпогиб от огня&r 🔥"
+  FIRE_TICK:
+    default:
+      - "&c{player} &eпогиб от огненного урона&r 🔥"
+  MELTING:
+    default:
+      - "&c{player} &eрастаял&r 🌞"
+  LAVA:
+    default:
+      - "&c{player} &eпогиб в лаве&r 🌋"
+  DROWNING:
+    default:
+      - "&c{player} &eутонул&r 🌊"
+  BLOCK_EXPLOSION:
+    default:
+      - "&c{player} &eпогиб от взрыва блока&r 💣"
+  ENTITY_EXPLOSION:
+    default:
+      - "&c{player} &eпогиб от взрыва сущности&r 💣"
+  VOID:
+    default:
+      - "&c{player} &eвыпал за пределы мира&r 🕳️"
+  LIGHTNING:
+    default:
+      - "&c{player} &eпогиб ударом молнии&r ⚡"
+  SUICIDE:
+    default:
+      - "&c{player} &eсовершил самоубийство&r 😔"
+  STARVATION:
+    default:
+      - "&c{player} &eумер от голода&r 🍽️"
+  POISON:
+    default:
+      - "&c{player} &eотравился&r ☠️"
+  MAGIC:
+    default:
+      - "&c{player} &eпогиб от магии&r ✨"
+  WITHER:
+    default:
+      - "&c{player} &eистощился&r 💀"
+  FALLING_BLOCK:
+    default:
+      - "&c{player} &eбыл раздавлен падающим блоком&r 🧱"
+  THORNS:
+    default:
+      - "&c{player} &eпогиб от колючек&r 🌵"
+  UNKNOWN:
+    default:
+      - "&c{player} &eпогиб по неизвестным причинам&r ❓"
