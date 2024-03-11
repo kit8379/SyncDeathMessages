@@ -1,11 +1,12 @@
 package org.me.syncdeathmessages.redis;
 
-import org.bukkit.Bukkit;
 import org.me.syncdeathmessages.SyncDeathMessages;
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
 import redis.clients.jedis.JedisPoolConfig;
 import redis.clients.jedis.JedisPubSub;
+
+import java.util.concurrent.CompletableFuture;
 
 public class RedisHandler {
     private final SyncDeathMessages plugin;
@@ -20,7 +21,7 @@ public class RedisHandler {
     }
 
     public void publish(String channel, String message) {
-        Bukkit.getScheduler().runTaskAsynchronously(plugin, () -> {
+        CompletableFuture.runAsync(() -> {
             try (Jedis jedis = getJedis()) {
                 jedis.publish(channel, message);
             }
@@ -28,7 +29,7 @@ public class RedisHandler {
     }
 
     public void subscribe(JedisPubSub pubSub, String channel) {
-        Bukkit.getScheduler().runTaskAsynchronously(plugin, () -> {
+        CompletableFuture.runAsync(() -> {
             try (Jedis jedis = getJedis()) {
                 jedis.subscribe(pubSub, channel);
             }

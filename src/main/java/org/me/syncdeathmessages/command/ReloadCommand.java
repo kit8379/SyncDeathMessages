@@ -15,7 +15,7 @@ public class ReloadCommand implements CommandExecutor {
 
     @Override
     public boolean onCommand(CommandSender commandSender, Command command, String s, String[] strings) {
-        if (!commandSender.hasPermission("deathevent.admin")) {
+        if (!commandSender.hasPermission("syncdeathmessages.admin")) {
             commandSender.sendMessage("You do not have permission to execute this command.");
             return true;
         }

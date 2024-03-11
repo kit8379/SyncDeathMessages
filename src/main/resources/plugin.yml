@@ -3,6 +3,7 @@ version: '${project.version}'
 main: org.me.syncdeathmessages.SyncDeathMessages
 api-version: 1.19
 author: kit8379
+folia-supported: true
 commands:
   sdmreload:
     description: Reloads the plugin

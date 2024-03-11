@@ -6,7 +6,6 @@ import net.md_5.bungee.api.chat.TextComponent;
 import net.md_5.bungee.api.chat.TranslatableComponent;
 import net.md_5.bungee.api.chat.hover.content.Text;
 import net.md_5.bungee.chat.ComponentSerializer;
-import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
@@ -21,6 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Random;
+import java.util.concurrent.CompletableFuture;
 import java.util.regex.Pattern;
 
 public class DeathMessageHandler {
@@ -33,7 +33,7 @@ public class DeathMessageHandler {
     }
 
     public void handleDeathEvent(PlayerDeathEvent event) {
-        Bukkit.getScheduler().runTaskAsynchronously(plugin, () -> {
+        CompletableFuture.runAsync(() -> {
             Player player = event.getEntity();
             Player killer = player.getKiller();
             String playerName = player.getDisplayName();
