@@ -23,9 +23,8 @@ SyncDeathMessages is a Minecraft plugin that enables cross-server death message 
 
 Once installed and configured, the plugin works automatically. When a player dies, their death message is broadcasted across all servers connected to the same Redis channel.
 
-## Contributing
-
-Contributions are welcome! Feel free to submit pull requests, report bugs, suggest features, or help with documentation.
+## Command
+- `/sdmreload` - Reloads the plugin's configuration file. (Permission: `syncdeathmessages.admin`)
 
 ## Configuration
 
