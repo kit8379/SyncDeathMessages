@@ -28,7 +28,7 @@ Once installed and configured, the plugin works automatically. When a player die
 
 ## Configuration
 
-The plugin's configuration file allows you to set up the Redis connection details, customize death messages, and more. Here's an example of the config.yml file:
+The plugin's configuration file allows you to set up the Redis connection details, customize death messages, and more. You can also visit here: https://github.com/kit8379/SyncDeathMessages/tree/master/languages to find your prefered languages and replace it with your existing messages section. Here's an example of the config.yml file:
 
 ```yaml
 # It is also called a cluster id sometimes.
