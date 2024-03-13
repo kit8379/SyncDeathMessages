@@ -28,8 +28,14 @@ Once installed and configured, the plugin works automatically. When a player die
 
 ## Configuration
 
-The plugin's configuration file allows you to set up the Redis connection details, customize death messages, and more. You can also visit here: https://github.com/kit8379/SyncDeathMessages/tree/master/languages to find your prefered languages and replace it with your existing messages section. Here's an example of the config.yml file:
+The plugin's configuration file allows you to set up the Redis connection details, customize death messages, and more. 
 
+You can also visit here: https://github.com/kit8379/SyncDeathMessages/tree/master/languages to find your prefered languages and replace it with your existing messages section. 
+
+The default config.yml messages also contain some emoji. If you want to use them, you need to have a plugin that supports emoji. You can use install our resource pack to see the emoji in the chat. You can download it from here:
+https://github.com/kit8379/SyncDeathMessages/tree/master/resourcepack
+
+Here's an example of the config.yml file:
 ```yaml
 # It is also called a cluster id sometimes.
 # If you have different set of servers and you want to have different death message channel for each server,
