@@ -123,3 +123,7 @@ messages:
 - Reporting bugs and suggesting features
 - Helping with documentation and the wiki
 - Sharing NewSky with others
+
+### Support:
+👮‍♂️ You can join our Discord to receive community support!
+Discord: https://discord.gg/UgHrFpQeEP

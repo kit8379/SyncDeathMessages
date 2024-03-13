@@ -1,0 +1,167 @@
+﻿{
+	"providers": [
+		{
+			"type": "ttf",
+			"file": "minecraft:negative_spaces.ttf",
+			"shift": [
+				0.0,
+				0.0
+			],
+			"size": 10.0,
+			"oversample": 1.0
+		},
+		{
+			"type": "bitmap",
+			"file": "minecraft:icon/chat/kitchen_knife.png",
+			"height": 10,
+			"ascent": 8,
+			"chars": [
+				"🔪"
+			]
+		},
+		{
+			"type": "bitmap",
+			"file": "minecraft:icon/chat/skull.png",
+			"height": 10,
+			"ascent": 8,
+			"chars": [
+				"💀"
+			]
+		},
+		{
+			"type": "bitmap",
+			"file": "minecraft:icon/chat/bow_and_arrow.png",
+			"height": 10,
+			"ascent": 8,
+			"chars": [
+				"🏹"
+			]
+		},
+		{
+			"type": "bitmap",
+			"file": "minecraft:icon/chat/hole.png",
+			"height": 10,
+			"ascent": 8,
+			"chars": [
+				"🕳️"
+			]
+		},
+		{
+			"type": "bitmap",
+			"file": "minecraft:icon/chat/fire.png",
+			"height": 10,
+			"ascent": 8,
+			"chars": [
+				"🔥"
+			]
+		},
+		{
+			"type": "bitmap",
+			"file": "minecraft:icon/chat/sun_with_face.png",
+			"height": 10,
+			"ascent": 8,
+			"chars": [
+				"🌞"
+			]
+		},
+		{
+			"type": "bitmap",
+			"file": "minecraft:icon/chat/volcano.png",
+			"height": 10,
+			"ascent": 8,
+			"chars": [
+				"🌋"
+			]
+		},
+		{
+			"type": "bitmap",
+			"file": "minecraft:icon/chat/water_wave.png",
+			"height": 10,
+			"ascent": 8,
+			"chars": [
+				"🌊"
+			]
+		},
+		{
+			"type": "bitmap",
+			"file": "minecraft:icon/chat/bomb.png",
+			"height": 10,
+			"ascent": 8,
+			"chars": [
+				"💣"
+			]
+		},
+		{
+			"type": "bitmap",
+			"file": "minecraft:icon/chat/high_voltage.png",
+			"height": 10,
+			"ascent": 8,
+			"chars": [
+				"⚡"
+			]
+		},
+		{
+			"type": "bitmap",
+			"file": "minecraft:icon/chat/pensive_face.png",
+			"height": 10,
+			"ascent": 8,
+			"chars": [
+				"😔"
+			]
+		},
+		{
+			"type": "bitmap",
+			"file": "minecraft:icon/chat/fork_and_knife_with_plate.png",
+			"height": 10,
+			"ascent": 8,
+			"chars": [
+				"🍽️"
+			]
+		},
+		{
+			"type": "bitmap",
+			"file": "minecraft:icon/chat/skull_and_crossbones.png",
+			"height": 10,
+			"ascent": 8,
+			"chars": [
+				"☠️"
+			]
+		},
+		{
+			"type": "bitmap",
+			"file": "minecraft:icon/chat/sparkles.png",
+			"height": 10,
+			"ascent": 8,
+			"chars": [
+				"✨"
+			]
+		},
+		{
+			"type": "bitmap",
+			"file": "minecraft:icon/chat/brick.png",
+			"height": 10,
+			"ascent": 8,
+			"chars": [
+				"🧱"
+			]
+		},
+		{
+			"type": "bitmap",
+			"file": "minecraft:icon/chat/cactus.png",
+			"height": 10,
+			"ascent": 8,
+			"chars": [
+				"🌵"
+			]
+		},
+		{
+			"type": "bitmap",
+			"file": "minecraft:icon/chat/question_mark.png",
+			"height": 10,
+			"ascent": 8,
+			"chars": [
+				"❓"
+			]
+		}
+	]
+}
