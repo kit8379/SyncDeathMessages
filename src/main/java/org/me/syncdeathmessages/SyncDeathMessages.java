@@ -25,6 +25,7 @@ public class SyncDeathMessages extends JavaPlugin {
     }
 
     public void initalize() {
+        saveDefaultConfig();
         FileConfiguration config = getConfig();
 
         // Initialize RedisHandler
