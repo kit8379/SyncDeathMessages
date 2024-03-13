@@ -40,7 +40,7 @@ public class SyncDeathMessages extends JavaPlugin {
         redisSubscriber.subscribeToChannel(channel);
 
         this.getServer().getPluginManager().registerEvents(new DeathEventListener(this, redisPublisher), this);
-        Objects.requireNonNull(this.getCommand("deatheventreload")).setExecutor(new ReloadCommand(this));
+        Objects.requireNonNull(this.getCommand("sdmreload")).setExecutor(new ReloadCommand(this));
     }
 
     @Override

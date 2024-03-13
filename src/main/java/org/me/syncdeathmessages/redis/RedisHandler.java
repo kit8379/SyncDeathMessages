@@ -17,7 +17,7 @@ public class RedisHandler {
         plugin.getLogger().info("Connecting to Redis...");
         JedisPoolConfig poolConfig = new JedisPoolConfig();
         this.jedisPool = new JedisPool(poolConfig, host, port, 2000, password);
-        plugin.getLogger().info("Connected to Redis!");
+        plugin.info("Connected to Redis!");
     }
 
     public void publish(String channel, String message) {
