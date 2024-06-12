@@ -3,6 +3,7 @@ package org.me.syncdeathmessages.command;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.jetbrains.annotations.NotNull;
 import org.me.syncdeathmessages.SyncDeathMessages;
 
 public class ReloadCommand implements CommandExecutor {
@@ -14,7 +15,7 @@ public class ReloadCommand implements CommandExecutor {
     }
 
     @Override
-    public boolean onCommand(CommandSender commandSender, Command command, String s, String[] strings) {
+    public boolean onCommand(CommandSender commandSender, @NotNull Command command, @NotNull String s, String[] strings) {
         if (!commandSender.hasPermission("syncdeathmessages.admin")) {
             commandSender.sendMessage("You do not have permission to execute this command.");
             return true;

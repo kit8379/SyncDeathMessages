@@ -1,5 +1,6 @@
 package org.me.syncdeathmessages.handler;
 
+import com.tcoded.folialib.wrapper.task.WrappedTask;
 import net.md_5.bungee.api.chat.BaseComponent;
 import net.md_5.bungee.api.chat.HoverEvent;
 import net.md_5.bungee.api.chat.TextComponent;
@@ -20,7 +21,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Random;
-import java.util.concurrent.CompletableFuture;
 import java.util.regex.Pattern;
 
 public class DeathMessageHandler {
@@ -33,9 +33,10 @@ public class DeathMessageHandler {
     }
 
     public void handleDeathEvent(PlayerDeathEvent event) {
-        CompletableFuture.runAsync(() -> {
-            Player player = event.getEntity();
-            Player killer = player.getKiller();
+        Player player = event.getEntity();
+        Player killer = player.getKiller();
+
+        plugin.getFoliaLib().getImpl().runAsync((WrappedTask task) -> {
             String playerName = player.getDisplayName();
 
             if (killer != null) {

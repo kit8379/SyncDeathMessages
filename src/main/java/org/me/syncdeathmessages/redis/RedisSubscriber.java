@@ -21,24 +21,22 @@ public class RedisSubscriber {
         pubSub = new JedisPubSub() {
             @Override
             public void onMessage(String channel, String message) {
-                plugin.debug("Received message from Redis: " + message);
                 BaseComponent[] components = ComponentSerializer.parse(message);
 
                 for (Player onlinePlayer : plugin.getServer().getOnlinePlayers()) {
                     onlinePlayer.spigot().sendMessage(components);
                 }
-                plugin.debug("Sent message to all online players");
             }
         };
 
         redisHandler.subscribe(pubSub, channel);
-        plugin.debug("Subscribed to Redis channel: " + channel);
+        plugin.info("Subscribed to Redis channel: " + channel);
     }
 
     public void unsubscribeFromChannel(String channel) {
         if (pubSub != null) {
             pubSub.unsubscribe(channel);
-            plugin.debug("Unsubscribed from Redis channel: " + channel);
         }
+        plugin.info("Unsubscribed from Redis channel: " + channel);
     }
 }
